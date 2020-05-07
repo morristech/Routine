@@ -13,6 +13,10 @@
   "license": "MIT",
   "devDependencies": {
     "eslint-config-airbnb": "^18.1.0",
+    "eslint-config-prettier": "^6.11.0",
     "prettier": "^2.0.5"
+  },
+  "dependencies": {
+  
   }
 }
