@@ -1,0 +1,14 @@
+{
+  "name": "routine",
+  "version": "1.0.0",
+  "description": "Create and manage projects using a graphical interface",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": {
+    "name": "Yasser Ameur El Idrissi",
+    "email": "getspookydev@gmail.com"
+  },
+  "license": "MIT"
+}
