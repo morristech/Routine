@@ -12,6 +12,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "dotenv-webpack": "^1.7.0",
     "eslint-config-airbnb": "^18.1.0",
     "eslint-config-equimper": "^2.2.2",
     "eslint-config-prettier": "^6.11.0",
