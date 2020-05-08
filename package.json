@@ -17,6 +17,7 @@
     "@babel/preset-react": "^7.9.4",
     "babel-loader": "^8.1.0",
     "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.5.3",
     "dotenv-webpack": "^1.7.0",
     "eslint-config-airbnb": "^18.1.0",
     "eslint-config-equimper": "^2.2.2",
