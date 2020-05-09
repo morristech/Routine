@@ -44,6 +44,7 @@
   },
   "dependencies": {
     "i18next-browser-languagedetector": "^4.1.1",
+    "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
