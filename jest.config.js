@@ -16,7 +16,7 @@ module.exports = {
   testPathIgnorePatterns: ['/(build|node_modules|packages)/'],
   setupFiles: ['./configuration/setupTests.js'],
   collectCoverage: true,
-  coverageReporters: ['json', 'lcov'],
+  coverageReporters: ['json'],
   transform: {
     '.+\\.(css|styl|less|sass|scss|png|svg|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
     '^.+\\.(js|jsx)?$': 'babel-jest',
