@@ -25,6 +25,7 @@
     "cssnano": "^4.1.10",
     "dotenv-webpack": "^1.7.0",
     "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
     "eslint-config-airbnb": "^18.1.0",
     "eslint-config-equimper": "^2.2.2",
     "eslint-config-prettier": "^6.11.0",
