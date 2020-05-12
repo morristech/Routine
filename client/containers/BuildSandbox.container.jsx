@@ -12,7 +12,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withNamespaces } from 'react-i18next';
-import WrapperHocComponent from './Wrapper.component';
+import WrapperHocComponent from '../containers/Wrapper.container';
 
 function BuildSandboxComponent(props) {
   /** @props **/
