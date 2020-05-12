@@ -11,7 +11,7 @@
 
 module.exports = {
   roots: ['./'],
-  testRegex: '\\.(test|spec)\\.js$',
+  testRegex: '\\.(test|spec)\\.jsx?$',
   moduleFileExtensions: ['js', 'jsx'],
   testPathIgnorePatterns: ['/(build|node_modules|packages)/'],
   setupFiles: ['./configuration/setupTests.js'],
