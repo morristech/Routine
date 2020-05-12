@@ -12,7 +12,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withNamespaces } from 'react-i18next';
-import Footer from './Footer.component';
 
 function AlertComponent(props) {
   const { t: lang } = props;
