@@ -19,9 +19,9 @@ const fontRegex = /\.(ttf|eot|woff|woff2|)$/;
 
 module.exports = {
   stats: 'errors-only',
-  entry: './app/main.jsx',
+  entry: './client/index.jsx',
   resolve: {
-    extensions: ['*', '.js', '.jsx', '.css', '.scss'],
+    extensions: ['.js', '.jsx', '.css', '.scss','*'],
   },
   module: {
     rules: [
