@@ -17,7 +17,7 @@ import FooterComponent from '../components/Footer.component';
 function WrapperHocComponent(WrappedComponent) {
   return (props) => (
     <Fragment>
-      <NavbarComponent logoSrc={require('../logo.svg')} />
+      <NavbarComponent logoSrc={require('../icons/logo.svg')} />
       <div className="container mx-auto h-screen px-8 pt-4">
         <WrappedComponent {...props} />
       </div>
