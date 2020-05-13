@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<SelectSearchComponent
+  data={
+    Array [
+      Object {
+        "createdBy": "Routine Team",
+        "image": "https://example.com/react.png",
+        "name": "Create-react-app",
+      },
+    ]
+  }
+  defaultStateValue="Create-react-app"
+  selectTemplate={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          "Create-react-app",
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
+/>
+`;
