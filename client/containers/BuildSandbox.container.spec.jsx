@@ -10,12 +10,12 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import '../../__mocks__/react-i18next';
-import BuildSandboxComponent from './BuildSandbox.container';
+import BuildSandboxContainer from './BuildSandbox.container';
 
 let wrapper = null;
 
 beforeEach(function () {
-  wrapper = <BuildSandboxComponent />;
+  wrapper = <BuildSandboxContainer />;
 });
 
 test('renders without crashing', () => {
