@@ -10,7 +10,9 @@
 const webpack = require('webpack');
 const Dotenv = require('dotenv-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { htmlTemplate } = require('./paths');
+const {
+  htmlTemplate
+} = require('./paths');
 
 // files regexes
 const jsRegex = /\.(jsx?)$/;
@@ -21,11 +23,10 @@ module.exports = {
   stats: 'errors-only',
   entry: './client/index.jsx',
   resolve: {
-    extensions: ['.js', '.jsx', '.css', '.scss','*'],
+    extensions: ['.js', '.jsx', '.css', '.scss', '*'],
   },
   module: {
-    rules: [
-      {
+    rules: [{
         test: jsRegex,
         exclude: /node_modules/,
         use: ['babel-loader'],
@@ -41,14 +42,14 @@ module.exports = {
       },
       {
         test: assetRegex,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              outputPath: 'assets/',
-            },
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: '[name].[contenthash].[ext]',
+            outputPath: 'assets/',
+            esModule: false
           },
-        ],
+        }, ],
       },
     ],
   },
