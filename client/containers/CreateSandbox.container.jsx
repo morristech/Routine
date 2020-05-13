@@ -14,7 +14,7 @@ import PropTypes from 'prop-types';
 import { withNamespaces } from 'react-i18next';
 import WrapperHocComponent from './Wrapper.container';
 
-function CreateSandboxComponent(props) {
+function CreateSandboxContainer(props) {
   /* @state */
   const [data, setData] = useState({
     appName: null,
@@ -138,8 +138,8 @@ function CreateSandboxComponent(props) {
   );
 }
 
-CreateSandboxComponent.propTypes = {
+CreateSandboxContainer.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-export default WrapperHocComponent(withNamespaces()(CreateSandboxComponent));
+export default WrapperHocComponent(withNamespaces()(CreateSandboxContainer));
