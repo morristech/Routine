@@ -7,6 +7,8 @@
     "client:start": "webpack-dev-server --open",
     "test": "jest --watchAll",
     "client:build": "webpack",
+    "build:css": "postcss client/styles/tailwind.css -o client/index.css",
+    "watch:css": "postcss client/styles/tailwind.css -o client/index.css -w",
     "prettier": "prettier --write \"**/*.+(js|jsx|json|css|md)\""
   },
   "author": {
@@ -53,7 +55,8 @@
     "i18next-browser-languagedetector": "^4.1.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "react-i18next": "^9.0.10"
   },
   "browserslist": {
     "production": [
