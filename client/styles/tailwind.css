@@ -1,0 +1,114 @@
+/*
+ * This file is part of the Routine project.
+ *
+ * (c) Yasser Ameur El Idrissi <getspookydev@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+@tailwind base;
+@tailwind utilities;
+
+/* Your custom CSS here */
+body {
+  background-color: #f7fafc !important;
+}
+
+.border-color-b20974 {
+  border-width: 10px 0 0;
+  border-bottom-style: solid;
+  -o-border-image: linear-gradient(139deg, #fb8817, #ff4b01, #c12127, #e02aff) 3;
+  border-image: linear-gradient(139deg, #fb8817, #ff4b01, #c12127, #e02aff) 3;
+}
+
+.loader_wrapper {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader_img {
+  width: 300px;
+}
+
+.progressGroup {
+  animation: 30s linear 1s infinite ProgressOpacity;
+  opacity: 0.25;
+}
+
+.progress {
+  animation: 2.5s ease-in-out infinite alternate Pulse;
+}
+
+.progress1 {
+  animation: 30s linear 1s infinite Progress1;
+  stroke-dasharray: 0 1000;
+}
+
+.progress2 {
+  animation: 30s linear 1s infinite Progress2;
+  stroke-dasharray: 0 0 1 1000;
+  display: none;
+}
+
+@keyframes ProgressOpacity {
+  to {
+    opacity: .35;
+  }
+}
+
+@keyframes Progress1 {
+  to {
+    stroke-dasharray: 280 1000;
+  }
+}
+
+@keyframes Progress2 {
+  to {
+    stroke-dasharray: 0 280 1 1000;
+  }
+}
+
+@keyframes Pulse {
+  to {
+    stroke: #f60;
+  }
+}
+
+#wheel {
+  animation: 1.5s linear infinite Spin;
+  transform: rotate(0deg);
+  transform-origin: 50px 50px;
+}
+
+@keyframes Spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#whisky {
+  animation: 1.5s ease-in-out infinite alternate Rock;
+  transform: rotate(20deg) translate(18px, 49px);
+  transform-origin: 50px 50px;
+}
+
+@keyframes Rock {
+  to {
+    transform: rotate(-20deg) translate(18px, 49px);
+  }
+}
+
+.legs {
+  transform-origin: 40px -40px;
+  transform: translatex(1px) rotate(2deg);
+  animation: 0.25s ease-in-out infinite alternate Wiggle;
+}
+
+@keyframes Wiggle {
+  50% {
+    transform: translatex(-1px) rotate(-2deg);
+  }
+}
