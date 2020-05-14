@@ -10,6 +10,7 @@
 import React from 'react';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import { Routes } from './Routes';
+import '../configuration/i18n';
 
 function App() {
   return (
