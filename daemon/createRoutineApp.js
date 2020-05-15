@@ -83,6 +83,11 @@ function createRoutineApp(
     return getTemplateInstall(extractData.url, destinationPath).then(result => {
       console.log(result);
       console.log(`template installed successfully ${chalk.green('✓')}`);
+      getInstallCommands(extractData.cmd.join(' && ')).then(result => {
+        console.log(`commands installed successfully ${chalk.green('✓')}`);
+        console.log(chalk.bold.cyan('Finish'));
+        resolve('ok');
+      });
     });
   });
 }
@@ -115,6 +120,32 @@ function getTemplateInstall(url, dest) {
         console.log(`Something went wrong ...`);
         reject(err);
       }
+      resolve('ok');
+    });
+  });
+}
+
+/**
+ * Install commands.
+ *
+ * @internals
+ * @function
+ * @name getInstallCommands
+ * @param {string} cmd
+ * @returns {Promise<string>}
+ */
+function getInstallCommands(cmd) {
+  console.log('Installing other commands...');
+  return new Promise((resolve, reject) => {
+    if (typeof cmd !== 'string') {
+      reject('cmd param must be of type string');
+    }
+    child_process.exec(commandInstall, (err, stdout) => {
+      if (err) {
+        console.log(`Something went wrong ...`);
+        reject(err);
+      }
+      console.log(stdout);
       resolve('ok');
     });
   });
