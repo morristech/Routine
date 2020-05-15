@@ -85,8 +85,8 @@ function createRoutineApp(
       console.log(`template installed successfully ${chalk.green('✓')}`);
       getInstallCommands(extractData.cmd.join(' && ')).then(result => {
         console.log(`commands installed successfully ${chalk.green('✓')}`);
-        console.log(chalk.bold.cyan('Finish'));
-        resolve('ok');
+        console.log('init git ...');
+        initGitRepository(destinationPath).then(response => resolve('ok'));
       });
     });
   });
@@ -150,3 +150,24 @@ function getInstallCommands(cmd) {
     });
   });
 }
+
+/**
+ * Init Git repository.
+ *
+ * @internals
+ * @function
+ * @name initGitRepository
+ * @param {string} dest
+ * @returns {Promise<any>}
+ */
+function initGitRepository(dest) {
+  return new Promise((resolve, reject) => {
+    exec(`cd ${dest} && git init`, (err, stdout) => {
+      if (err) {
+        reject(new TypeError(err));
+      } else {
+        resolve(stdout);
+      }
+    });
+  });
+};
