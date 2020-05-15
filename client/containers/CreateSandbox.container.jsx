@@ -9,18 +9,16 @@
 
 'use strict';
 
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useContext } from 'react';
 import PropTypes from 'prop-types';
+import { isEmpty } from 'validator';
 import { withNamespaces } from 'react-i18next';
+import { CreateSandboxContext } from '../SandboxContext';
 import WrapperHocComponent from './Wrapper.container';
 
 function CreateSandboxContainer(props) {
   /* @state */
-  const [data, setData] = useState({
-    appName: null,
-    folderPath: null,
-    vcs: null,
-  });
+  const { data, setData } = useContext(CreateSandboxContext);
 
   /* @props */
   const { t: lang } = props;
@@ -76,9 +74,15 @@ function CreateSandboxContainer(props) {
             name="appName"
             onChange={HandleSandboxInputChanges}
           />
-          <p className="text-gray-600 text-xs italic">
-            {lang('CreateSandbox.component.project.folder.info')}
-          </p>
+          {isEmpty(data.appName) ? (
+            <p class="text-red-500 text-xs italic">
+              {lang('CreateSandbox.component.project.folder.input.error')}
+            </p>
+          ) : (
+            <p className="text-gray-600 text-xs italic">
+              {lang('CreateSandbox.component.project.folder.info')}
+            </p>
+          )}
         </div>
         <div className="flex flex-wrap -mx-3 mb-6 relative">
           <label
@@ -95,7 +99,12 @@ function CreateSandboxContainer(props) {
             name="folderPath"
             onChange={HandleSandboxInputChanges}
           />
-          <i className="pointer-events-none text-lg fa fa-folder absolute inset-y-0 right-0 flex items-center pr-4 mt-4 text-gray-700" />
+          <i className="pointer-events-none text-lg fa fa-folder absolute inset-y-0 right-0 flex items-center pr-4 mt-0 text-gray-700" />
+          {isEmpty(data.folderPath) ? (
+            <p class="text-red-500 text-xs italic">
+              {lang('CreateSandbox.component.project.folder.input.error')}
+            </p>
+          ) : null}
         </div>
         <div className="flex flex-wrap justify-between -mx-3 mb-6">
           <label
@@ -111,8 +120,9 @@ function CreateSandboxContainer(props) {
               name="vcs"
               onChange={HandleSandboxInputChanges}
             >
-              <option>Git</option>
-              <option>Mercurial</option>
+              <option value="none">None</option>
+              <option value="git">Git</option>
+              <option value="mercurial">Mercurial</option>
             </select>
             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
               <svg
@@ -124,6 +134,11 @@ function CreateSandboxContainer(props) {
               </svg>
             </div>
           </div>
+          {isEmpty(data.vcs) ? (
+            <p class="text-red-500 pt-3 text-xs italic">
+              {lang('CreateSandbox.component.vcs.select.error')}
+            </p>
+          ) : null}
         </div>
         <div className="flex flex-wrap -mx-3 mb-6">
           <button
