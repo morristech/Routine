@@ -74,7 +74,7 @@ function createRoutineApp(
     console.log(`You are using ${extractData.name}`);
     console.log(`You are using ${extractData.version}v`);
     // checking template url.
-    return getTemplateInstall(extractData.url, destinationPath).then(result => {
+    return getTemplateInstall(extractData.from, destinationPath).then(result => {
       console.log(result);
       console.log(`template installed successfully ${chalk.green('✓')}`);
       getInstallCommands(extractData.cmd.join(' && ')).then(result => {
