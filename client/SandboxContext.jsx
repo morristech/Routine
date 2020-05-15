@@ -18,9 +18,11 @@ import { createContext } from 'react';
  * @var initState
  */
 export const initState = {
-  appName: null,
-  folderPath: null,
-  vcs: null,
+  appName: '',
+  folderPath: '',
+  vcs: 'none', // default vcs value
+  template: '',
+  packageManager: '',
 };
 
 export const CreateSandboxContext = createContext(null);
