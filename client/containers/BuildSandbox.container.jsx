@@ -15,15 +15,15 @@ import { withNamespaces } from 'react-i18next';
 import WrapperHocComponent from '../containers/Wrapper.container';
 
 function BuildSandboxContainer(props) {
-  /** @props **/
+  /* @props */
   const { t: lang } = props;
 
   return (
     <Fragment>
-      <h1 className="text-gray-800 text-center font-sans text-3xl font-bold mt-16 mb-1">
+      <h1 className="text-gray-800 text-center font-sans text-4xl font-bold mt-16 mb-1">
         {lang('BuildSandbox.component.title')}
       </h1>
-      <p className="mb-6 text-center text-gray-600">
+      <p className="mb-6 text-xl text-center text-gray-600">
         {lang('BuildSandbox.component.sub.title')}
       </p>
       <div className="max-w-sm mx-auto mt-10">
