@@ -9,18 +9,16 @@
 
 'use strict';
 
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { withNamespaces } from 'react-i18next';
-import WrapperHocComponent from './Wrapper.component';
+import WrapperHocComponent from './Wrapper.container';
+import { CreateSandboxContext } from '../SandboxContext';
 import SelectSearchComponent from '../components/SelectSearch.component';
 
 function ApplyTemplateContainer(props) {
   /* @state */
-  const [data, setData] = useState({
-    template: null,
-    packageManager: null,
-  });
+  const { data, setData } = useContext(CreateSandboxContext);
 
   /* @props */
   const { t: lang } = props;
@@ -71,10 +69,10 @@ function ApplyTemplateContainer(props) {
 
   return (
     <Fragment>
-      <h1 className="text-gray-800 text-center font-sans text-3xl font-bold mt-16 mb-1">
+      <h1 className="text-gray-800 text-center font-sans text-4xl font-bold mt-16 mb-1">
         {lang('Template.component.title')}
       </h1>
-      <p className="mb-6 text-center text-gray-600">
+      <p className="mb-6 text-xl text-center text-gray-600">
         {lang('Template.component.sub.title')}
       </p>
       <div className="max-w-sm mx-auto mt-10">
