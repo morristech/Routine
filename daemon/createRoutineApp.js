@@ -33,7 +33,6 @@ function createRoutineApp(
   appName,
   destinationPath,
   template,
-  packageManager,
   vcs = 'none'
 ) {
   return new Promise((resolve, reject) => {
@@ -51,11 +50,6 @@ function createRoutineApp(
       console.log('For example:');
       console.log(`${chalk.green('C:\Users\User\Documents')}`);
       reject('Please specify the project destination');
-    }
-    if (typeof packageManager === 'undefined') {
-      console.log('For example:');
-      console.log(`${chalk.green('yarn')}`);
-      reject('Please specify the package manager');
     }
     // validate app name
     const validationResult = validateProjectName(appName);
