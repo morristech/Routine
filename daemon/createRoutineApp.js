@@ -74,7 +74,7 @@ function createRoutineApp(
     console.log(`You are using ${extractData.name}`);
     console.log(`You are using ${extractData.version}v`);
     // checking template url.
-    return getTemplateInstall(extractData.from, destinationPath).then(result => {
+    return getTemplateInstall(extractData.from, destinationPath, template).then(result => {
       console.log(result);
       console.log(`template installed successfully ${chalk.green('✓')}`);
       getInstallCommands(extractData.cmd.join(' && ')).then(result => {
@@ -94,15 +94,16 @@ function createRoutineApp(
  * @name getTemplateInstall
  * @param {string} url
  * @param {string} dest
+ * @param {string} template
  * @returns {Promise<string>}
  */
-function getTemplateInstall(url, dest) {
+function getTemplateInstall(url, dest, template) {
   let commandInstall = null;
   console.log('Fetching template...');
   return new Promise((resolve, reject) => {
     if (/^(https:\/\/github.com).+/.test(url)) {
       console.log(`Fetching from ${chalk.yellow('github')} repository...`);
-      commandInstall = `git clone ${template} ${url} ${dest}`;
+      commandInstall = `git clone ${url} ${dest}`;
     } else {
       console.log('For example:');
       console.log(`${chalk.green('https://github.com/getspooky/create-express-app')}`);
