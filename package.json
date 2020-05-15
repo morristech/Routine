@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "client:start": "webpack-dev-server --open",
+    "demon:serve": "",
     "test": "jest --watchAll",
     "client:build": "webpack",
     "build:css": "postcss client/styles/tailwind.css -o client/index.css",
@@ -43,6 +44,7 @@
     "jest-transform-stub": "^2.0.0",
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.14.1",
+    "nodemon": "^2.0.4",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "postcss-cli": "^7.1.1",
     "prettier": "^2.0.5",
