@@ -70,6 +70,7 @@
     "react-dom": "^16.13.1",
     "react-i18next": "^9.0.10",
     "react-router-dom": "^5.2.0",
+    "validate-npm-package-name": "^3.0.0",
     "validator": "^13.0.0"
   },
   "browserslist": {
