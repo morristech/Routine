@@ -42,7 +42,9 @@ function NavbarComponent(props) {
           <i className="w-8 fa fa-sticky-note	p-2 bg-gray-200 rounded-full" />
         </span>
         <span className="px-1 float-right mr-3 cursor-pointer hover:text-gray-700">
-          <i className="w-8 fa fa-support	p-2 bg-gray-200 rounded-full" />
+          <p className="text-gray-700 text-sm mt-2">
+            {lang('Navbar.component.team.hello')}
+          </p>
         </span>
       </div>
     </div>
