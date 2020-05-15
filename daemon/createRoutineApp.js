@@ -19,6 +19,7 @@ var chalk = require('chalk'),
 /**
  * Create Routine app.
  *
+ * @exports
  * @function
  * @name createRoutineApp
  * @param {string} appName
@@ -43,7 +44,7 @@ function createRoutineApp(
     }
     if (typeof template === 'undefined') {
       console.log('For example:');
-      console.log(`${chalk.green('create-react-app')}`);
+      console.log(`${chalk.green('create-express-app')}`);
       reject('Please specify the template');
     }
     if (typeof destinationPath === 'undefined') {
@@ -79,6 +80,42 @@ function createRoutineApp(
     console.log(`You are using ${extractData.name}`);
     console.log(`You are using ${extractData.version}v`);
     // checking template url.
+    return getTemplateInstall(extractData.url, destinationPath).then(result => {
+      console.log(result);
+      console.log(`template installed successfully ${chalk.green('✓')}`);
+    });
+  });
+}
 
+/**
+ * Install Given Template from url.
+ *
+ * @internals
+ * @function
+ * @name getTemplateInstall
+ * @param {string} url
+ * @param {string} dest
+ * @returns {Promise<string>}
+ */
+function getTemplateInstall(url, dest) {
+  let commandInstall = null;
+  console.log('Fetching template...');
+  return new Promise((resolve, reject) => {
+    if (/^(https:\/\/github.com).+/.test(url)) {
+      console.log(`Fetching from ${chalk.yellow('github')} repository...`);
+      commandInstall = `git clone ${template} ${url} ${dest}`;
+    } else {
+      console.log('For example:');
+      console.log(`${chalk.green('https://github.com/getspooky/create-express-app')}`);
+      reject('The given url is not valid');
+    }
+    console.log('Installing template ...');
+    child_process.exec(commandInstall, (err, stdout) => {
+      if (err) {
+        console.log(`Something went wrong ...`);
+        reject(err);
+      }
+      resolve('ok');
+    });
   });
 }
