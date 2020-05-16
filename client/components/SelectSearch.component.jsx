@@ -45,7 +45,7 @@ function SelectSearchComponent(props) {
         name="template"
         onChange={HandleTemplateInputChanges}
       />
-      <div className="w-full h-48 bg-scroll bg-gray-200">
+      <div className="w-full h-64 bg-scroll bg-gray-200">
         <div className="flex flex-no-wrap flex-col">
           {data
             .filter((e) =>
