@@ -15,10 +15,14 @@ var chalk = require('chalk'),
   cors = require('cors'),
   path = require('path'),
   fs = require('fs'),
+  util = require('util'),
   yaml = require('js-yaml'),
   validateProjectName = require('validate-npm-package-name'),
   child_process = require('child_process'),
   output = require('./output');
+
+// convert callback to promise
+const readFile = util.promisify(fs.readFile);
 
 // secure your Express apps by setting various HTTP headers
 app.use(cors());
@@ -35,14 +39,19 @@ app.use(bodyParser.json());
 
 app.get('/sandbox/list/templates', function (req, res) {
   return res.status(200).json({
-    data: [{
-      name: 'create-react-app',
-      description: 'Create React apps with no build configuration',
-      createdBy: 'Created By Routine team',
-      image: 'https://raw.githubusercontent.com/getspooky/react-boilerplate/master/app/images/icon-512x512.png',
-    }, ],
+    data: [],
   });
 });
+
+/**
+ * Get all supported templates.
+ *
+ * @internals
+ * @function
+ * @name getAllTemplates
+ * @return {Promise<Array>}
+ */
+function getAllTemplates() {}
 
 /**
  * Create Routine app.
@@ -57,12 +66,7 @@ app.get('/sandbox/list/templates', function (req, res) {
  * @param {string} packageManager
  * @returns {Promise<boolean>}
  */
-function createRoutineApp(
-  appName,
-  destinationPath,
-  template,
-  vcs = 'none'
-) {
+function createRoutineApp(appName, destinationPath, template, vcs = 'none') {
   return new Promise((resolve, reject) => {
     if (typeof appName === 'undefined') {
       console.log('For example:');
@@ -76,7 +80,7 @@ function createRoutineApp(
     }
     if (typeof destinationPath === 'undefined') {
       console.log('For example:');
-      console.log(`${chalk.green('C:\Users\User\Documents')}`);
+      console.log(`${chalk.green('C:UsersUserDocuments')}`);
       reject('Please specify the project destination');
     }
     // validate app name
@@ -90,7 +94,12 @@ function createRoutineApp(
     }
     console.log();
     console.log(`${appName} accepted ${chalk.green('✓')}`);
-    const findTempltate = path.join(__dirname, '..', 'templates', template + '.yml');
+    const findTempltate = path.join(
+      __dirname,
+      '..',
+      'templates',
+      template + '.yml',
+    );
     // load template file example create-react-app.yml
     let fileContents = fs.readFileSync(findTempltate, 'utf8');
     // convert YAML file data to JS literals and objects.
@@ -102,15 +111,24 @@ function createRoutineApp(
     console.log(`You are using ${extractData.name}`);
     console.log(`You are using ${extractData.version}v`);
     // checking template url.
-    return getTemplateInstall(extractData.from, destinationPath, template).then(result => {
-      console.log(result);
-      console.log(`template installed successfully ${chalk.green('✓')}`);
-      getInstallCommands(extractData.cmd.join(' && ')).then(result => {
-        console.log(`commands installed successfully ${chalk.green('✓')}`);
-        console.log('init git ...');
-        initGitRepository(destinationPath).then(response => resolve('ok'));
-      });
-    });
+    return getTemplateInstall(extractData.from, destinationPath, template).then(
+      (result) => {
+        console.log(result);
+        console.log(`template installed successfully ${chalk.green('✓')}`);
+        // Install given scripts.
+        getInstallScripts(extractData.cmd.join(' && ')).then((result) => {
+          console.log(`commands installed successfully ${chalk.green('✓')}`);
+          if (vcs === 'git') {
+            console.log('init git ...');
+            initGitRepository(destinationPath).then((response) =>
+              resolve('ok'),
+            );
+          } else {
+            resolve('ok');
+          }
+        });
+      },
+    );
   });
 }
 
@@ -134,7 +152,9 @@ function getTemplateInstall(url, dest, template) {
       commandInstall = `git clone ${url} ${dest}`;
     } else {
       console.log('For example:');
-      console.log(`${chalk.green('https://github.com/getspooky/create-express-app')}`);
+      console.log(
+        `${chalk.green('https://github.com/getspooky/create-express-app')}`,
+      );
       reject('The given url is not valid');
     }
     console.log('Installing template ...');
@@ -149,16 +169,16 @@ function getTemplateInstall(url, dest, template) {
 }
 
 /**
- * Install commands.
+ * Install scripts.
  *
  * @internals
  * @function
- * @name getInstallCommands
+ * @name getInstallScripts
  * @param {string} cmd
  * @returns {Promise<string>}
  */
-function getInstallCommands(cmd) {
-  console.log('Installing other commands...');
+function getInstallScripts(cmd) {
+  console.log('Installing scripts...');
   return new Promise((resolve, reject) => {
     if (typeof cmd !== 'string') {
       reject('cmd param must be of type string');
@@ -193,7 +213,7 @@ function initGitRepository(dest) {
       }
     });
   });
-};
+}
 
 /**
  * The server object listens on port 4200.
