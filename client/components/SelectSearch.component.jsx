@@ -16,12 +16,7 @@ import { isEmpty } from 'validator';
 
 function SelectSearchComponent(props) {
   /* @props */
-  const {
-    data,
-    defaultStateValue,
-    t: lang,
-    selectTemplate: HandleSelectTemplate,
-  } = props;
+  const { data, defaultStateValue, t: lang } = props;
 
   /* @state */
   const [template, setTemplate] = useState('');
@@ -62,7 +57,6 @@ function SelectSearchComponent(props) {
               <div
                 className="flex items-center p-4 hover:bg-gray-300"
                 key={element.name}
-                onClick={HandleSelectTemplate(element.name)}
               >
                 <img className="w-10 h-10 mr-4" src={element.image} />
                 <div className="text-sm">
@@ -93,7 +87,6 @@ SelectSearchComponent.propTypes = {
       createdBy: PropTypes.string.isRequired,
     }),
   ),
-  selectTemplate: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
   defaultStateValue: PropTypes.string.isRequired,
 };
