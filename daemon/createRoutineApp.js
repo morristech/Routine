@@ -110,8 +110,8 @@ function createRoutineApp(appName, destinationPath, template, vcs = 'none') {
     console.log();
     console.log(`You are using ${extractData.name}`);
     console.log(`You are using ${extractData.version}v`);
-    // checking template url.
-    return getTemplateInstall(extractData.from, destinationPath, template).then(
+    // fetching template url.
+    return getTemplateInstall(extractData.from, destinationPath).then(
       (result) => {
         console.log(result);
         console.log(`template installed successfully ${chalk.green('✓')}`);
@@ -140,10 +140,9 @@ function createRoutineApp(appName, destinationPath, template, vcs = 'none') {
  * @name getTemplateInstall
  * @param {string} url
  * @param {string} dest
- * @param {string} template
  * @returns {Promise<string>}
  */
-function getTemplateInstall(url, dest, template) {
+function getTemplateInstall(url, dest) {
   let commandInstall = null;
   console.log('Fetching template...');
   return new Promise((resolve, reject) => {
