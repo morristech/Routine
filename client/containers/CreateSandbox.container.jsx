@@ -21,7 +21,7 @@ function CreateSandboxContainer(props) {
   const { data, setData } = useContext(CreateSandboxContext);
 
   /* @props */
-  const { t: lang } = props;
+  const { t: lang, history } = props;
 
   /**
    * Handle Input Changes.
@@ -48,6 +48,9 @@ function CreateSandboxContainer(props) {
    */
   function HandleCreateSandbox(event) {
     event.preventDefault();
+    !isEmpty(data.folderPath) && !isEmpty(data.appName)
+      ? history.push('sandbox/template')
+      : null;
   }
 
   return (
@@ -75,7 +78,7 @@ function CreateSandboxContainer(props) {
             onChange={HandleSandboxInputChanges}
           />
           {isEmpty(data.appName) ? (
-            <p class="text-red-500 text-xs italic">
+            <p className="text-red-500 text-xs italic">
               {lang('CreateSandbox.component.project.folder.input.error')}
             </p>
           ) : (
@@ -101,7 +104,7 @@ function CreateSandboxContainer(props) {
           />
           <i className="pointer-events-none text-lg fa fa-folder absolute inset-y-0 right-0 flex items-center pr-4 mt-0 text-gray-700" />
           {isEmpty(data.folderPath) ? (
-            <p class="text-red-500 text-xs italic">
+            <p className="text-red-500 text-xs italic">
               {lang('CreateSandbox.component.project.folder.input.error')}
             </p>
           ) : null}
