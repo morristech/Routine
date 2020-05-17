@@ -10,16 +10,44 @@
 'use strict';
 
 var chalk = require('chalk'),
+  app = require('express')(),
+  bodyParser = require('body-parser'),
+  cors = require('cors'),
   path = require('path'),
   fs = require('fs'),
   yaml = require('js-yaml'),
   validateProjectName = require('validate-npm-package-name'),
-  child_process = require('child_process');
+  child_process = require('child_process'),
+  output = require('./output');
+
+// secure your Express apps by setting various HTTP headers
+app.use(cors());
+
+// parse application/x-www-form-urlencoded
+app.use(
+  bodyParser.urlencoded({
+    extended: false,
+  }),
+);
+
+// parse application/json
+app.use(bodyParser.json());
+
+app.get('/sandbox/list/templates', function (req, res) {
+  return res.status(200).json({
+    data: [{
+      name: 'create-react-app',
+      description: 'Create React apps with no build configuration',
+      createdBy: 'Created By Routine team',
+      image: 'https://raw.githubusercontent.com/getspooky/react-boilerplate/master/app/images/icon-512x512.png',
+    }, ],
+  });
+});
 
 /**
  * Create Routine app.
  *
- * @exports
+ * @internals
  * @function
  * @name createRoutineApp
  * @param {string} appName
@@ -166,3 +194,22 @@ function initGitRepository(dest) {
     });
   });
 };
+
+/**
+ * The server object listens on port 4200.
+ *
+ * @var {number}
+ */
+const port = process.env.PORT || 4200;
+
+/**
+ * The HOST environment variable.
+ *
+ * @var {string}
+ */
+const host = process.env.HOST || '127.0.0.1';
+
+app.listen(port, function (err) {
+  if (err) output.error(err);
+  output.appStarted(port, host);
+});
