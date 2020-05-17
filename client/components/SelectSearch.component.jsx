@@ -11,7 +11,6 @@
 
 import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
-import { prototype } from 'enzyme-adapter-react-16';
 
 function SelectSearchComponent(props) {
   /* @props */
@@ -22,7 +21,7 @@ function SelectSearchComponent(props) {
   } = props;
 
   /* @state */
-  const [template, setTemplate] = useState(defaultStateValue);
+  const [template, setTemplate] = useState('');
 
   /**
    * Handle template input changes.
@@ -41,7 +40,7 @@ function SelectSearchComponent(props) {
         className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
         id="grid-project-name"
         type="text"
-        placeholder={template}
+        placeholder={defaultStateValue}
         name="template"
         onChange={HandleTemplateInputChanges}
       />
@@ -66,7 +65,7 @@ function SelectSearchComponent(props) {
                     {element.name}
                   </p>
                   <p className="text-gray-600 text-xs mt-1">
-                    {element.createdBy}
+                    {element.description}
                   </p>
                 </div>
               </div>
@@ -81,6 +80,7 @@ SelectSearchComponent.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.exact({
       name: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
       image: PropTypes.string.isRequired,
       createdBy: PropTypes.string.isRequired,
     }),
