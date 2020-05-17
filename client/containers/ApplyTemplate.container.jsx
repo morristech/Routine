@@ -9,19 +9,28 @@
 
 'use strict';
 
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment, useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { withNamespaces } from 'react-i18next';
+import binding from '../binding.json';
 import WrapperHocComponent from './Wrapper.container';
-import { CreateSandboxContext } from '../SandboxContext';
 import SelectSearchComponent from '../components/SelectSearch.component';
+import { CreateSandboxContext } from '../SandboxContext';
 
 function ApplyTemplateContainer(props) {
   /* @state */
   const { data, setData } = useContext(CreateSandboxContext);
 
+  const [template, setTemplate] = useState([]);
+
   /* @props */
   const { t: lang } = props;
+
+  useEffect(function () {
+    fetch(binding['sandbox.get.list.templates'])
+      .then((response) => response.json())
+      .then(({ data }) => setTemplate(data));
+  }, []);
 
   /**
    * Handle Input Changes.
@@ -85,14 +94,8 @@ function ApplyTemplateContainer(props) {
           </label>
           {/* Filter Teamplate */}
           <SelectSearchComponent
-            data={[
-              {
-                name: 'Laravel',
-                image: 'https://laravel.com/img/logomark.min.svg',
-                createdBy: 'By Routine Core Team',
-              },
-            ]}
-            defaultStateValue="Laravel"
+            data={template}
+            defaultStateValue="create-react-app"
             selectTemplate={HandleSelectTemplate}
           />
         </div>
