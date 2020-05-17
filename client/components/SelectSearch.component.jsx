@@ -11,12 +11,15 @@
 
 import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
+import { withNamespaces } from 'react-i18next';
+import { isEmpty } from 'validator';
 
 function SelectSearchComponent(props) {
   /* @props */
   const {
     data,
     defaultStateValue,
+    t: lang,
     selectTemplate: HandleSelectTemplate,
   } = props;
 
@@ -44,7 +47,12 @@ function SelectSearchComponent(props) {
         name="template"
         onChange={HandleTemplateInputChanges}
       />
-      <div className="w-full h-64 bg-scroll bg-gray-200">
+      {isEmpty(template) ? (
+        <p className="text-red-500 pb-2 text-xs italic">
+          {lang('SelectSearch.component.template.input.error')}
+        </p>
+      ) : null}
+      <div className="w-full h-64 overflow-y-auto bg-gray-200">
         <div className="flex flex-no-wrap flex-col">
           {data
             .filter((e) =>
@@ -86,6 +94,7 @@ SelectSearchComponent.propTypes = {
     }),
   ),
   selectTemplate: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
   defaultStateValue: PropTypes.string.isRequired,
 };
 
@@ -93,4 +102,4 @@ SelectSearchComponent.defaultProps = {
   defaultStateValue: 'Create-react-app',
 };
 
-export default SelectSearchComponent;
+export default withNamespaces()(SelectSearchComponent);
