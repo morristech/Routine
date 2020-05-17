@@ -11,6 +11,7 @@
 
 import React, { Fragment, useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { isEmpty } from 'validator';
 import { withNamespaces } from 'react-i18next';
 import binding from '../binding.json';
 import WrapperHocComponent from './Wrapper.container';
@@ -24,12 +25,16 @@ function ApplyTemplateContainer(props) {
   const [template, setTemplate] = useState([]);
 
   /* @props */
-  const { t: lang } = props;
+  const { t: lang, history } = props;
 
   useEffect(function () {
-    fetch(binding['sandbox.get.list.templates'])
-      .then((response) => response.json())
-      .then(({ data }) => setTemplate(data));
+    if (isEmpty(data.appName) || isEmpty(data.folderPath)) {
+      history.push('/create/sandbox');
+    } else {
+      fetch(binding['sandbox.get.list.templates'])
+        .then((response) => response.json())
+        .then(({ data }) => setTemplate(data));
+    }
   }, []);
 
   /**
@@ -45,23 +50,6 @@ function ApplyTemplateContainer(props) {
       ...data,
       [event.target.name]: event.target.value,
     });
-  }
-
-  /**
-   * Select given template.
-   *
-   * @function
-   * @name HandleSelectTemplate
-   * @param {string} givenTemplate
-   * @returns {event}
-   */
-  function HandleSelectTemplate(givenTemplate) {
-    return (event) => {
-      setData({
-        ...data,
-        template: givenTemplate,
-      });
-    };
   }
 
   /**
@@ -96,7 +84,6 @@ function ApplyTemplateContainer(props) {
           <SelectSearchComponent
             data={template}
             defaultStateValue="create-react-app"
-            selectTemplate={HandleSelectTemplate}
           />
         </div>
         <div className="flex flex-wrap -mx-3 mb-6">
