@@ -22,7 +22,6 @@ export const initState = {
   folderPath: '',
   vcs: 'none', // default vcs value
   template: '',
-  packageManager: '',
 };
 
 export const CreateSandboxContext = createContext(null);
