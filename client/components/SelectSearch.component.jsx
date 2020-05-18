@@ -12,11 +12,15 @@
 import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import { withNamespaces } from 'react-i18next';
-import { isEmpty } from 'validator';
 
 function SelectSearchComponent(props) {
   /* @props */
-  const { data, defaultStateValue, t: lang } = props;
+  const {
+    data,
+    defaultStateValue,
+    selectTemplate: HandleSelectTemplate,
+    t: lang,
+  } = props;
 
   /* @state */
   const [template, setTemplate] = useState('');
@@ -42,11 +46,6 @@ function SelectSearchComponent(props) {
         name="template"
         onChange={HandleTemplateInputChanges}
       />
-      {isEmpty(template) ? (
-        <p className="text-red-500 pb-2 text-xs italic">
-          {lang('SelectSearch.component.template.input.error')}
-        </p>
-      ) : null}
       <div className="w-full h-64 overflow-y-auto bg-gray-200">
         <div className="flex flex-no-wrap flex-col">
           {data
@@ -57,6 +56,7 @@ function SelectSearchComponent(props) {
               <div
                 className="flex items-center p-4 hover:bg-gray-300"
                 key={element.name}
+                onClick={HandleSelectTemplate(element.name)}
               >
                 <img className="w-10 h-10 mr-4" src={element.image} />
                 <div className="text-sm">
@@ -84,10 +84,13 @@ SelectSearchComponent.propTypes = {
       name: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
       image: PropTypes.string.isRequired,
-      createdBy: PropTypes.string.isRequired,
+      version: PropTypes.string.isRequired,
+      from: PropTypes.string.isRequired,
+      cmd: PropTypes.array.isRequired,
     }),
   ),
   t: PropTypes.func.isRequired,
+  selectTemplate: PropTypes.func.isRequired,
   defaultStateValue: PropTypes.string.isRequired,
 };
 
