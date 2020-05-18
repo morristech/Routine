@@ -48,9 +48,9 @@ function CreateSandboxContainer(props) {
    */
   function HandleCreateSandbox(event) {
     event.preventDefault();
-    !isEmpty(data.folderPath) && !isEmpty(data.appName)
-      ? history.push('sandbox/template')
-      : null;
+    if (!isEmpty(data.folderPath) && !isEmpty(data.appName)) {
+      history.push('/sandbox/template');
+    }
   }
 
   return (
