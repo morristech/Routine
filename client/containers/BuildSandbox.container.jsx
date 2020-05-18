@@ -22,6 +22,17 @@ function BuildSandboxContainer(props) {
   /* @props */
   const { t: lang } = props;
 
+  useEffect(function () {
+    if (
+      isEmpty(data.appName) ||
+      isEmpty(data.folderPath) ||
+      isEmpty(data.template) ||
+      isEmpty(data.vcs)
+    ) {
+      history.push('/sandbox/template/');
+    }
+  }, []);
+
   return (
     <Fragment>
       <h1 className="text-gray-800 text-center font-sans text-4xl font-bold mt-16 mb-1">
