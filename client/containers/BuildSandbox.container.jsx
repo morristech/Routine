@@ -9,12 +9,16 @@
 
 'use strict';
 
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { withNamespaces } from 'react-i18next';
 import WrapperHocComponent from '../containers/Wrapper.container';
+import { CreateSandboxContext } from '../SandboxContext';
 
 function BuildSandboxContainer(props) {
+  /* @state */
+  const { data, setData } = useContext(CreateSandboxContext);
+
   /* @props */
   const { t: lang } = props;
 
