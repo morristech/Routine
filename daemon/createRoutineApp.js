@@ -46,6 +46,14 @@ app.get('/sandbox/list/templates', function (req, res) {
   });
 });
 
+app.post('/build/sandbox', function (req, res) {
+  return createRoutineApp(req.body).then((response) => {
+    return res.status(200).json({
+      data: response
+    });
+  });
+});
+
 /**
  * Get all supported templates.
  *
@@ -59,10 +67,13 @@ function loadTemplates() {
   //joining path of directory
   const directoryPath = path.resolve(__dirname, '..', 'templates');
   // listing all files from directory
-  return readdir(directoryPath).then(files => {
+  return readdir(directoryPath).then((files) => {
     files.forEach(function (file) {
       // load template file example create-react-app.yml
-      let fileContents = fs.readFileSync(directoryPath.concat('/' + file), 'utf8');
+      let fileContents = fs.readFileSync(
+        directoryPath.concat('/' + file),
+        'utf8',
+      );
       // convert YAML file data to JS literals and objects.
       let extractData = yaml.safeLoad(fileContents);
       templates.push(extractData);
@@ -83,7 +94,12 @@ function loadTemplates() {
  * @param {string} packageManager
  * @returns {Promise<boolean>}
  */
-function createRoutineApp(appName, destinationPath, template, vcs = 'none') {
+function createRoutineApp({
+  appName,
+  folderPath,
+  template,
+  vcs = 'none'
+}) {
   return new Promise((resolve, reject) => {
     if (typeof appName === 'undefined') {
       console.log('For example:');
@@ -95,9 +111,9 @@ function createRoutineApp(appName, destinationPath, template, vcs = 'none') {
       console.log(`${chalk.green('create-express-app')}`);
       reject('Please specify the template');
     }
-    if (typeof destinationPath === 'undefined') {
+    if (typeof folderPath === 'undefined') {
       console.log('For example:');
-      console.log(`${chalk.green('C:UsersUserDocuments')}`);
+      console.log(`${chalk.green('C:Users/User/Documents')}`);
       reject('Please specify the project destination');
     }
     // validate app name
@@ -128,7 +144,7 @@ function createRoutineApp(appName, destinationPath, template, vcs = 'none') {
     console.log(`You are using ${extractData.name}`);
     console.log(`You are using ${extractData.version}v`);
     // fetching template url.
-    return getTemplateInstall(extractData.from, destinationPath).then(
+    return getTemplateInstall(extractData.from, folderPath).then(
       (result) => {
         console.log(result);
         console.log(`template installed successfully ${chalk.green('✓')}`);
@@ -247,9 +263,11 @@ const host = process.env.HOST || '127.0.0.1';
 
 app.listen(port, function (err) {
   if (err) output.error(err);
-  loadTemplates().then(() => {
-    console.log(`Templates loaded ${chalk.green('✓')}`);
-  }).then(() => {
-    output.appStarted(port, host);
-  });
+  loadTemplates()
+    .then(() => {
+      console.log(`Templates loaded ${chalk.green('✓')}`);
+    })
+    .then(() => {
+      output.appStarted(port, host);
+    });
 });
