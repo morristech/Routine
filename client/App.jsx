@@ -7,18 +7,25 @@
  * file that was distributed with this source code.
  */
 
-import React from 'react';
-import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Switch, Route, BrowserRouter, Redirect } from 'react-router-dom';
+import { CreateSandboxContext, initState } from './SandboxContext';
 import { Routes } from './Routes';
 import '../configuration/i18n';
 
 function App() {
+  /** @state **/
+  const [data, setData] = useState(initState);
+
   return (
     <BrowserRouter>
       <Switch>
-        {Routes.map(({ id, path, component }) => {
-          return <Route key={id} exact path={path} component={component} />;
-        })}
+        <CreateSandboxContext.Provider value={{ data, setData }}>
+          {Routes.map(({ id, path, component }) => {
+            return <Route key={id} exact path={path} component={component} />;
+          })}
+        </CreateSandboxContext.Provider>
+        <Redirect from="/" to="/dashboard" />
       </Switch>
     </BrowserRouter>
   );
