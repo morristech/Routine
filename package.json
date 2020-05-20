@@ -60,7 +60,6 @@
   },
   "dependencies": {
     "body-parser": "^1.19.0",
-    "cors": "^2.8.5",
     "i18next-browser-languagedetector": "^4.1.1",
     "ip": "^1.1.5",
     "prop-types": "^15.7.2",
