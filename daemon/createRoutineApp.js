@@ -144,7 +144,7 @@ function createRoutineApp({
     console.log(`You are using ${extractData.name}`);
     console.log(`You are using ${extractData.version}v`);
     // fetching template url.
-    return getTemplateInstall(extractData.from, folderPath).then(
+    return getTemplateInstall(extractData.from, folderPath.concat(appName)).then(
       (result) => {
         console.log(result);
         console.log(`template installed successfully ${chalk.green('✓')}`);
@@ -206,13 +206,13 @@ function getTemplateInstall(url, dest) {
  * @internals
  * @function
  * @name getInstallScripts
- * @param {string} cmd
+ * @param {string} commandInstall
  * @returns {Promise<string>}
  */
-function getInstallScripts(cmd) {
+function getInstallScripts(commandInstall) {
   console.log('Installing scripts...');
   return new Promise((resolve, reject) => {
-    if (typeof cmd !== 'string') {
+    if (typeof commandInstall !== 'string') {
       reject('cmd param must be of type string');
     }
     child_process.exec(commandInstall, (err, stdout) => {
