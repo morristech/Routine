@@ -13,6 +13,7 @@ import React, { Fragment, useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { isEmpty } from 'validator';
 import { withNamespaces } from 'react-i18next';
+import SweetAlert from 'sweetalert2';
 import binding from '../binding.json';
 import WrapperHocComponent from './Wrapper.container';
 import SelectSearchComponent from '../components/SelectSearch.component';
@@ -38,18 +39,26 @@ function ApplyTemplateContainer(props) {
   }, []);
 
   /**
-   * Handle Input Changes.
+   * Handle Select Template.
    *
    * @function
-   * @name HandleTemplateInputChanges
-   * @param {event} event
+   * @name HandleSelectTemplate
+   * @param {string} value
    * @returns {void}
    */
-  function HandleTemplateInputChanges(event) {
-    setData({
-      ...data,
-      [event.target.name]: event.target.value,
-    });
+  function HandleSelectTemplate(value) {
+    return (event) => {
+      setData({
+        ...data,
+        template: value,
+      });
+      // display sweet alert message.
+      SweetAlert.fire(
+        lang('ApplyTemplate.container.sweetalert.success'),
+        value.concat(lang('ApplyTemplate.container.template.selected')),
+        'success',
+      );
+    };
   }
 
   /**
@@ -62,6 +71,9 @@ function ApplyTemplateContainer(props) {
    */
   function HandleBuildSandbox(event) {
     event.preventDefault();
+    if (!isEmpty(data.template)) {
+      history.push('/sandbox/build');
+    }
   }
 
   return (
@@ -83,6 +95,7 @@ function ApplyTemplateContainer(props) {
           {/* Filter Teamplate */}
           <SelectSearchComponent
             data={template}
+            selectTemplate={HandleSelectTemplate}
             defaultStateValue="create-react-app"
           />
         </div>
