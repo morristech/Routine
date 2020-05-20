@@ -88,7 +88,7 @@ function loadTemplates() {
  * @function
  * @name createRoutineApp
  * @param {string} appName
- * @param {string} destinationPath
+ * @param {string} folderPath
  * @param {string} vcs
  * @param {string} template
  * @param {string} packageManager
@@ -143,17 +143,18 @@ function createRoutineApp({
     console.log();
     console.log(`You are using ${extractData.name}`);
     console.log(`You are using ${extractData.version}v`);
+    folderPath = folderPath.concat(appName);
     // fetching template url.
-    return getTemplateInstall(extractData.from, folderPath.concat(appName)).then(
+    return getTemplateInstall(extractData.from, folderPath).then(
       (result) => {
         console.log(result);
         console.log(`template installed successfully ${chalk.green('✓')}`);
         // Install given scripts.
-        getInstallScripts(extractData.cmd.join(' && ')).then((result) => {
+        getInstallScripts(`cd ${folderPath} && ${extractData.cmd.join(' && ')}`).then((result) => {
           console.log(`commands installed successfully ${chalk.green('✓')}`);
           if (vcs === 'git') {
             console.log('init git ...');
-            initGitRepository(destinationPath).then((response) =>
+            initGitRepository(folderPath).then((response) =>
               resolve('ok'),
             );
           } else {
