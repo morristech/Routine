@@ -50,25 +50,23 @@ function SelectSearchComponent(props) {
         <div className="flex flex-no-wrap flex-col">
           {data
             .filter((e) =>
-              e.name.toLowerCase().includes(template.toLowerCase()),
+              e.Name.toLowerCase().includes(template.toLowerCase()),
             )
-            .map((element) => (
+            .map(({ Name, Description, Logo }) => (
               <div
                 className="flex items-center p-4 hover:bg-gray-300"
-                key={element.name}
-                onClick={HandleSelectTemplate(element.name)}
+                key={name}
+                onClick={HandleSelectTemplate(Name)}
               >
-                <img className="w-10 h-10 mr-4" src={element.image} />
+                <img className="w-10 h-10 mr-4" src={Logo} />
                 <div className="text-sm">
                   <p
                     className="text-gray-800 text-lg font-medium leading-none"
                     id="element-name"
                   >
-                    {element.name}
+                    {Name}
                   </p>
-                  <p className="text-gray-600 text-xs mt-1">
-                    {element.description}
-                  </p>
+                  <p className="text-gray-600 text-xs mt-1">{Description}</p>
                 </div>
               </div>
             ))}
@@ -79,16 +77,7 @@ function SelectSearchComponent(props) {
 }
 
 SelectSearchComponent.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.exact({
-      name: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      image: PropTypes.string.isRequired,
-      version: PropTypes.string.isRequired,
-      from: PropTypes.string.isRequired,
-      cmd: PropTypes.array.isRequired,
-    }),
-  ),
+  data: PropTypes.arrayOf(PropTypes.object),
   t: PropTypes.func.isRequired,
   selectTemplate: PropTypes.func.isRequired,
   defaultStateValue: PropTypes.string.isRequired,
