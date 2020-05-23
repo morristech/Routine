@@ -10,6 +10,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -34,7 +35,7 @@ type templateConfig struct {
 
 var (
 	listOftemplates []templateConfig
-	port            string = ":8080"
+	port            string = ":4200"
 	cache           bool   = false
 )
 
@@ -129,6 +130,8 @@ func helloServer(w http.ResponseWriter, r *http.Request) {
 
 func getSandboxTemplates(w http.ResponseWriter, r *http.Request) {
 
+	enableCors(&w)
+
 	if !cache {
 		files, err := ioutil.ReadDir("templates/")
 
@@ -161,6 +164,11 @@ func getSandboxTemplates(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	yaml.NewEncoder(w).Encode(listOftemplates)
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(listOftemplates)
 
+}
+
+func enableCors(w *http.ResponseWriter) {
+	(*w).Header().Set("Access-Control-Allow-Origin", "*")
 }
