@@ -9,15 +9,58 @@
 
 'use strict';
 
-import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
+import React, { Fragment, useState } from 'react';
 import { withNamespaces } from 'react-i18next';
+import PropTypes from 'prop-types';
+import SweetAlert from 'sweetalert2';
 import WrapperHocComponent from './Wrapper.container';
 import '../styles/animate.css';
 
 function ImportTemplateContainer(props) {
+  /* @state */
+  const [templateFile, setTemplateFile] = useState(null);
+
   /* @props */
   const { t: lang } = props;
+
+  /**
+   * Handle File Change.
+   *
+   * @function
+   * @name HandleFileChange
+   * @param {event} event
+   * @returns {void}
+   */
+  function HandleFileChange(event) {
+    event.preventDefault();
+    setTemplateFile(e.target.files[0]);
+  }
+
+  /**
+   * Handle Create Template.
+   *
+   * @function
+   * @name HandleCreateTemplate
+   * @param {event} event
+   * @returns {void}
+   */
+  function HandleCreateTemplate(event) {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append('file', templateFile);
+    fetch(binding['sandbox.import.template'], {
+      method: 'POST',
+      mode: 'no-cors', // no-cors
+      body: formData,
+    }).then((response) => {
+      // display sweet alert message.
+      SweetAlert.fire(
+        lang('Import.container.sweetalert.success'),
+        value.concat(lang('Import.container.sweetalert.create.template')),
+        'success',
+      );
+    });
+  }
 
   return (
     <Fragment>
@@ -31,10 +74,15 @@ function ImportTemplateContainer(props) {
         <div className="flex flex-wrap flex-column justify-center">
           <i
             className="fa fa-cloud-upload pulse text-gray-400 rounded-full"
-            style={{ fontSize: '9.32rem' }}
+            style={{ fontSize: '9.52rem' }}
           />
+          <input type="file" name="template_file" className="mb-1 mt-4" />
           <p className="w-full text-center px-4 text-gray-600 text-xs">
-            {lang('Import.component.compress.alert')}
+            {lang('Import.container.create.template.alert')}
+            <br />
+            <a href="" className="underline text-xs text-blue-500">
+              {lang('Common.click.here')}
+            </a>
           </p>
         </div>
       </div>
