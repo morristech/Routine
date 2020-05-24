@@ -33,6 +33,13 @@ type templateConfig struct {
 	Scripts     []string `yaml:"scripts"`
 }
 
+type routineApp struct {
+	AppName    string `json:"appName"`
+	FolderPath string `json:"folderPath"`
+	Template   string `json:"template"`
+	Vcs        string `json:"vcs"`
+}
+
 var (
 	listOftemplates []templateConfig
 	port            string = ":4200"
@@ -84,9 +91,8 @@ func createRoutineApp(appName string, folderPath string, template string) error 
 
 	for _, script := range config.Scripts {
 		args := strings.Split(script, " ")
-		fmt.Print(args)
 		outScript, _ := exec.Command(args[0], args[1:]...).Output()
-		fmt.Print(string(outScript))
+		fmt.Println(string(outScript))
 	}
 
 	if err != nil {
@@ -121,11 +127,53 @@ func ymlContent(template string) (templateConfig, error) {
 func main() {
 	http.HandleFunc("/", helloServer)
 	http.HandleFunc("/sandbox/templates", getSandboxTemplates)
+	http.HandleFunc("/build/sandbox", buildSandboxTemplate)
 	http.ListenAndServe(port, nil)
 }
 
 func helloServer(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Hello Routine Daemon, %s! \n", r.URL.Path[1:])
+}
+
+func buildSandboxTemplate(w http.ResponseWriter, r *http.Request) {
+
+	enableCors(&w)
+
+	switch r.Method {
+	case "POST":
+		if err := r.ParseForm(); err != nil {
+			fmt.Fprintf(w, "ParseForm() err: %v", err)
+			return
+		}
+		//var data templateConfig
+		// return the string response containing the request body
+		bodyBytes, err := ioutil.ReadAll(r.Body)
+		if err != nil {
+			log.Fatal(err)
+		}
+		// Convert response body to string
+		bodyString := string(bodyBytes)
+		fmt.Println("API Response as String:\n" + bodyString)
+		// Convert response body to template struct
+		var routineStruct routineApp
+		err = json.Unmarshal(bodyBytes, &routineStruct)
+
+		if err != nil {
+			log.Fatal(err)
+		}
+		// create routine app
+		createRoutineApp(routineStruct.AppName, routineStruct.FolderPath, routineStruct.Template)
+
+		defer r.Body.Close()
+		break
+	default:
+		fmt.Fprintf(w, "Sorry, only POST methods are supported.")
+		break
+	}
+}
+
+func enableCors(w *http.ResponseWriter) {
+	(*w).Header().Set("Access-Control-Allow-Origin", "*")
 }
 
 func getSandboxTemplates(w http.ResponseWriter, r *http.Request) {
@@ -164,11 +212,6 @@ func getSandboxTemplates(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(listOftemplates)
 
-}
-
-func enableCors(w *http.ResponseWriter) {
-	(*w).Header().Set("Access-Control-Allow-Origin", "*")
 }
