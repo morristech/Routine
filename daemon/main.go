@@ -53,6 +53,9 @@ func createRoutineApp(appName string, folderPath string, template string) error 
 	if folderPath == "" {
 		return fmt.Errorf("Folder Path is required")
 	}
+	if !strings.HasSuffix(folderPath, "/") {
+		return fmt.Errorf("%s should end with /", folderPath)
+	}
 	if template == "" {
 		return fmt.Errorf("Template is required")
 	}
@@ -61,7 +64,10 @@ func createRoutineApp(appName string, folderPath string, template string) error 
 		"The given template %s loaded successfully ✓ \n", template,
 	)
 
-	config, err := ymlContent(template)
+	// example : /home/getspooky/Demo/my-app
+	folderPath = folderPath + appName
+
+	config, err := ymlContent(template + ".yml")
 
 	// make sure that all given url start with file or https?
 	_, err = regexp.MatchString("^(https://github.com).+$", config.From)
@@ -73,8 +79,7 @@ func createRoutineApp(appName string, folderPath string, template string) error 
 		log.Fatal("URL must be cloned from github or local file")
 	}
 
-	outputClone, err := exec.Command("git", "clone", config.From, folderPath).Output()
-	fmt.Print(string(outputClone))
+	_, err = exec.Command("git", "clone", config.From, folderPath).Output()
 
 	if err != nil {
 		log.Fatal(err)
@@ -98,6 +103,8 @@ func createRoutineApp(appName string, folderPath string, template string) error 
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	fmt.Printf("Template successfully installed")
 
 	return nil
 
@@ -161,6 +168,7 @@ func buildSandboxTemplate(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			log.Fatal(err)
 		}
+
 		// create routine app
 		createRoutineApp(routineStruct.AppName, routineStruct.FolderPath, routineStruct.Template)
 
