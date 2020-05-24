@@ -1,0 +1,4 @@
+{
+  "sandbox.get.list.templates": "http://localhost:4200/sandbox/templates",
+  "sandbox.build.sandbox": "http://localhost:4200/build/sandbox"
+}
