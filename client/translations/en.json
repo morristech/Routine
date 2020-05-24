@@ -1,11 +1,14 @@
 {
+  "Common.click.here":"Click Here",
   "Alert.component.badge": "New",
   "Alert.component.github": "GitHub",
   "Alert.component.content": "Contribute to the core repository on",
   "Navbar.component.dashboard": "Dashboard",
+  "Navbar.component.team.hello": "Created with ❤️️ by amazing team",
   "Footer.component.license": "MIT Licensed | ",
   "Footer.component.author": "Yasser Ameur El Idrissi",
   "Footer.component.copyright": "Copyright © 2020",
+  "SelectSearch.component.template.input.error": "Please select a template",
   "CreateSandbox.component.title": "Create a new project",
   "CreateSandbox.component.sub.title": "🛠 Get projects ready fast ",
   "CreateSandbox.component.project.folder": "Project Folder Name",
@@ -24,10 +27,12 @@
   "Template.component.sub.title": "🙌 Start from a working project",
   "Template.component.official.tamplate": "Official Templates",
   "Template.component.package.manager": "Package Manager",
-  "BuildSandbox.component.title": "Building Sandbox",
+  "ApplyTemplate.container.sweetalert.success": "Good job!",
+  "ApplyTemplate.container.template.selected": " template selected successfully",
+  "BuildSandbox.component.title": "Building Sandbox...",
   "BuildSandbox.component.sub.title": "⏱ This might take a couple of minutes",
-  "Import.component.title": "Importing an Existing Project",
+  "Import.component.title": "Importing an Existing Template",
   "Import.component.sub.title": "📦 keeping configuration saved",
   "Import.component.submit": "Save Configuration",
-  "Import.component.compress.alert": "Compress the desired files and folder into a single zip file"
+  "Import.component.compress.alert": "Learn how to create your custom template."
 }
