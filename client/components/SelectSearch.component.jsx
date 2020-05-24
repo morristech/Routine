@@ -58,7 +58,7 @@ function SelectSearchComponent(props) {
                 key={name}
                 onClick={HandleSelectTemplate(Name)}
               >
-                <img className="w-10 h-10 mr-4" src={Logo} />
+                <img className="w-12 h-12 mr-4" src={Logo} />
                 <div className="text-sm">
                   <p
                     className="text-gray-800 text-lg font-medium leading-none"
