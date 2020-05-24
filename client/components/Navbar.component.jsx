@@ -9,11 +9,14 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router';
 import { withNamespaces } from 'react-i18next';
 
 function NavbarComponent(props) {
   /** @state **/
-  const { t: lang } = props;
+  const { t: lang, history } = props;
+
   return (
     <div className="w-full">
       <div className="border-color-b20974" />
@@ -29,18 +32,18 @@ function NavbarComponent(props) {
           <i className="w-8 fa fa-th-list	p-2 bg-gray-200 rounded-full" />
           <span className="mx-1">{lang('Navbar.component.dashboard')}</span>
         </span>
-        <span className="px-1 cursor-pointer hover:text-gray-700">
+        <span
+          className="px-1 cursor-pointer hover:text-gray-700"
+          onClick={() => history.push('/import/template')}
+        >
           <i className="fa fa-cloud-upload p-2 bg-gray-200 rounded-full" />
         </span>
-        <span className="px-1 cursor-pointer hover:text-gray-700">
+        <Link
+          to="/create/sandbox"
+          className="px-1 cursor-pointer hover:text-gray-700"
+        >
           <i className="w-8 fa fa-plug p-2 bg-gray-200 rounded-full" />
-        </span>
-        <span className="px-1 cursor-pointer hover:text-gray-700">
-          <i className="w-8 fa fa-database p-2 bg-gray-200 rounded-full" />
-        </span>
-        <span className="px-1 cursor-pointer hover:text-gray-700">
-          <i className="w-8 fa fa-sticky-note	p-2 bg-gray-200 rounded-full" />
-        </span>
+        </Link>
         <span className="px-1 float-right mr-3 cursor-pointer hover:text-gray-700">
           <p className="text-gray-700 text-sm mt-2">
             {lang('Navbar.component.team.hello')}
@@ -55,4 +58,4 @@ NavbarComponent.propTypes = {
   logoSrc: PropTypes.string.isRequired,
 };
 
-export default withNamespaces()(NavbarComponent);
+export default withNamespaces()(withRouter(NavbarComponent));
