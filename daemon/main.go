@@ -12,6 +12,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -135,6 +136,7 @@ func main() {
 	http.HandleFunc("/", helloServer)
 	http.HandleFunc("/sandbox/templates", getSandboxTemplates)
 	http.HandleFunc("/build/sandbox", buildSandboxTemplate)
+	http.HandleFunc("/import/template", uploadNewYmlTempate)
 	http.ListenAndServe(port, nil)
 }
 
@@ -182,6 +184,21 @@ func buildSandboxTemplate(w http.ResponseWriter, r *http.Request) {
 
 func enableCors(w *http.ResponseWriter) {
 	(*w).Header().Set("Access-Control-Allow-Origin", "*")
+}
+
+func uploadNewYmlTempate(w http.ResponseWriter, r *http.Request) {
+	file, handler, err := r.FormFile("file")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
+	path, _ := filepath.Abs("templates/" + handler.Filename)
+	f, err := os.OpenFile(path, os.O_WRONLY|os.O_CREATE, 0666)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer f.Close()
+	io.Copy(f, file)
 }
 
 func getSandboxTemplates(w http.ResponseWriter, r *http.Request) {
