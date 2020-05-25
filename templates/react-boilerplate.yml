@@ -1,0 +1,13 @@
+name: "react-boilerplate"
+
+version: "4.0.0"
+
+description: "Quick setup for new performance oriented, offline–first React.js applications"
+
+image: "https://bit.ly/2ZHVU6n"
+
+from: "https://github.com/react-boilerplate/react-boilerplate.git"
+
+scripts:
+  - "npm run start"
+  - "npm run setup"
