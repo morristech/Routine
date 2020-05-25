@@ -9,10 +9,16 @@
 
 'use strict';
 
-import React, { Fragment, useContext, useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { isEmpty } from 'validator';
+import React, {
+  Fragment,
+  useContext,
+  useState,
+  useEffect,
+  useMemo,
+} from 'react';
 import { withNamespaces } from 'react-i18next';
+import { isEmpty } from 'validator';
+import PropTypes from 'prop-types';
 import SweetAlert from 'sweetalert2';
 import binding from '../binding.json';
 import WrapperHocComponent from './Wrapper.container';
@@ -34,7 +40,7 @@ function ApplyTemplateContainer(props) {
     } else {
       fetch(binding['sandbox.get.list.templates'])
         .then((response) => response.json())
-        .then(({ data }) => setTemplate(data));
+        .then((data) => setTemplate(data));
     }
   }, []);
 
@@ -76,6 +82,18 @@ function ApplyTemplateContainer(props) {
     }
   }
 
+  // Will skip rerendering if the argument `template` will not change
+  const memoSelectSearchComponent = useMemo(
+    () => (
+      <SelectSearchComponent
+        data={template}
+        selectTemplate={HandleSelectTemplate}
+        defaultStateValue="create-react-app"
+      />
+    ),
+    [template],
+  );
+
   return (
     <Fragment>
       <h1 className="text-gray-800 text-center font-sans text-4xl font-bold mt-16 mb-1">
@@ -93,11 +111,7 @@ function ApplyTemplateContainer(props) {
             {lang('Template.component.official.tamplate')}
           </label>
           {/* Filter Teamplate */}
-          <SelectSearchComponent
-            data={template}
-            selectTemplate={HandleSelectTemplate}
-            defaultStateValue="create-react-app"
-          />
+          {memoSelectSearchComponent}
         </div>
         <div className="flex flex-wrap -mx-3 mb-6">
           <button
