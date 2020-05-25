@@ -1,0 +1,12 @@
+name: "electron-react-boilerplate"
+
+version: "6.0.0"
+
+description: "A Foundation for Scalable Cross-Platform Apps"
+
+image: "https://bit.ly/3els7nJ"
+
+from: "https://github.com/electron-react-boilerplate/electron-react-boilerplate.git"
+
+scripts:
+  - "yarn"
