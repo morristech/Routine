@@ -1,0 +1,13 @@
+name: "hackathon-starter"
+
+version: "6.0.0"
+
+description: "A boilerplate for Node.js web applications"
+
+image: "https://bit.ly/2ZB7AYu"
+
+from: "https://github.com/sahat/hackathon-starter.git"
+
+scripts:
+  - "npm install"
+  - "node app.js"
