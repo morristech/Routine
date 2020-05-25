@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import DashboardContainer from './containers/Dashboard.container';
+import HomeContainer from './containers/Home.container';
 import CreateSandboxContainer from './containers/CreateSandbox.container';
 import ApplyTemplateContainer from './containers/ApplyTemplate.container';
 import BuildSandboxContainer from './containers/BuildSandbox.container';
@@ -18,7 +18,8 @@ import ImportTemplateContainer from './containers/ImportTemplate.container';
  * @warn Each route should map to a component.
  * @exports
  */
-export const Routes = [{
+export const Routes = [
+  {
     id: '#CreateSandbox',
     path: '/create/sandbox',
     component: CreateSandboxContainer,
@@ -31,16 +32,16 @@ export const Routes = [{
   {
     id: '#BuildSandbox',
     path: '/sandbox/build',
-    component: BuildSandboxContainer
+    component: BuildSandboxContainer,
   },
   {
-    id: '#Dashboard',
-    path: '/dashboard',
-    component: DashboardContainer
+    id: '#Home',
+    path: '/',
+    component: HomeContainer,
   },
   {
     id: '#Import',
     path: '/import/template',
-    component: ImportTemplateContainer
-  }
+    component: ImportTemplateContainer,
+  },
 ];
