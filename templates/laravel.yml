@@ -1,0 +1,13 @@
+name: "laravel"
+
+version: "6.18.8"
+
+description: "A PHP framework for web artisans"
+
+image: "https://bit.ly/3glQdAU"
+
+from: "https://github.com/laravel/laravel.git"
+
+scripts:
+  - "composer install"
+  - "php artisan serve"
