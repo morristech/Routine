@@ -1,0 +1,12 @@
+name: "server-configs-nginx"
+
+version: "3.2.0"
+
+description: "Nginx HTTP server boilerplate configs"
+
+image: "https://bit.ly/2yyOLKd"
+
+from: "https://github.com/h5bp/server-configs-nginx.git"
+
+scripts:
+  - "nginx"
