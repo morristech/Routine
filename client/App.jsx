@@ -25,7 +25,6 @@ function App() {
             return <Route key={id} exact path={path} component={component} />;
           })}
         </CreateSandboxContext.Provider>
-        <Redirect from="/" to="/dashboard" />
       </Switch>
     </BrowserRouter>
   );
