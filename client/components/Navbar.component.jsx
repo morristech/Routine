@@ -28,16 +28,19 @@ function NavbarComponent(props) {
             className="w-8 h-8 -mt-1 inline mx-auto"
           />
         </span>
-        <span className="px-2 py-1 cursor-pointer bg-gray-200 hover:text-gray-700 text-sm rounded mb-5">
+        <Link
+          to="/dashboard"
+          className="px-2 py-1 cursor-pointer bg-gray-200 hover:text-gray-700 text-sm rounded mb-5"
+        >
           <i className="w-8 fa fa-th-list	p-2 bg-gray-200 rounded-full" />
-          <span className="mx-1">{lang('Navbar.component.dashboard')}</span>
-        </span>
-        <span
+          <span className="mx-1">{lang('Navbar.container.dashboard')}</span>
+        </Link>
+        <Link
+          to="/import/template"
           className="px-1 cursor-pointer hover:text-gray-700"
-          onClick={() => history.push('/import/template')}
         >
           <i className="fa fa-cloud-upload p-2 bg-gray-200 rounded-full" />
-        </span>
+        </Link>
         <Link
           to="/create/sandbox"
           className="px-1 cursor-pointer hover:text-gray-700"
