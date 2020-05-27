@@ -1,0 +1,13 @@
+name: "TypeScript-Node-Starter"
+
+version: "1.0.0"
+
+description: "A reference example for TypeScript and Node created by Microsoft"
+
+image: "https://bit.ly/2M3GG3o"
+
+from: "https://github.com/microsoft/TypeScript-Node-Starter.git"
+
+scripts:
+  - "npm install"
+  - "npm run start"
