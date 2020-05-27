@@ -9,18 +9,21 @@
 
 'use strict';
 
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
+import SweetAlert from 'sweetalert2';
+import { isEmpty } from 'validator';
 import { withNamespaces } from 'react-i18next';
 import WrapperHocComponent from '../containers/Wrapper.container';
 import { CreateSandboxContext } from '../SandboxContext';
+import binding from '../binding.json';
 
 function BuildSandboxContainer(props) {
   /* @state */
   const { data, setData } = useContext(CreateSandboxContext);
 
   /* @props */
-  const { t: lang } = props;
+  const { t: lang, history } = props;
 
   useEffect(function () {
     if (
@@ -30,8 +33,36 @@ function BuildSandboxContainer(props) {
       isEmpty(data.vcs)
     ) {
       history.push('/sandbox/template/');
+    } else {
+      HandleSubmitSandboxData();
     }
   }, []);
+
+  /**
+   * Handle Submit Sandbox Data.
+   *
+   * @function
+   * @name HandleSubmitSandboxData
+   * @returns {void}
+   */
+  function HandleSubmitSandboxData() {
+    fetch(binding['sandbox.build.sandbox'], {
+      method: 'POST',
+      mode: 'no-cors', // no-cors
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    }).then((response) => {
+      // display sweet alert message.
+      SweetAlert.fire(
+        lang('BuildSandbox.container.sweetalert.success'),
+        lang('BuildSandbox.container.sweetalert.add.template'),
+        'success',
+      );
+    });
+  }
 
   return (
     <Fragment>
