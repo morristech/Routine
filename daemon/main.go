@@ -44,7 +44,7 @@ type routineApp struct {
 var (
 	listOftemplates []templateConfig
 	port            string = ":4200"
-	cache           bool   = false
+	isLoaded        bool   = false
 )
 
 func createRoutineApp(appName string, folderPath string, template string) error {
@@ -57,6 +57,7 @@ func createRoutineApp(appName string, folderPath string, template string) error 
 	if !strings.HasSuffix(folderPath, "/") {
 		return fmt.Errorf("%s should end with /", folderPath)
 	}
+
 	if template == "" {
 		return fmt.Errorf("Template is required")
 	}
@@ -71,7 +72,7 @@ func createRoutineApp(appName string, folderPath string, template string) error 
 	config, err := ymlContent(template + ".yml")
 
 	// make sure that all given url start with file or https?
-	_, err = regexp.MatchString("^(https://github.com).+$", config.From)
+	_, err = regexp.MatchString("^(https://github.com).+(.git)$", config.From)
 	fmt.Printf(
 		"Cloning origin template %s... \n", template,
 	)
@@ -199,13 +200,15 @@ func uploadNewYmlTempate(w http.ResponseWriter, r *http.Request) {
 	}
 	defer f.Close()
 	io.Copy(f, file)
+	// don't use cache system.
+	isLoaded = true
 }
 
 func getSandboxTemplates(w http.ResponseWriter, r *http.Request) {
 
 	enableCors(&w)
 
-	if !cache {
+	if !isLoaded {
 		files, err := ioutil.ReadDir("templates/")
 
 		if err != nil {
@@ -213,7 +216,6 @@ func getSandboxTemplates(w http.ResponseWriter, r *http.Request) {
 		}
 
 		for _, f := range files {
-			fmt.Print(f.Name())
 			config, err := ymlContent(f.Name())
 
 			if err != nil {
@@ -231,8 +233,7 @@ func getSandboxTemplates(w http.ResponseWriter, r *http.Request) {
 			// add template data to map
 			listOftemplates = append(listOftemplates, p)
 
-			// using cache
-			cache = true
+			isLoaded = true
 
 		}
 	}
