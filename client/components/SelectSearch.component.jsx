@@ -46,16 +46,17 @@ function SelectSearchComponent(props) {
         name="template"
         onChange={HandleTemplateInputChanges}
       />
+
       <div className="w-full h-64 overflow-y-auto bg-gray-200">
         <div className="flex flex-no-wrap flex-col">
           {data
             .filter((e) =>
               e.Name.toLowerCase().includes(template.toLowerCase()),
             )
-            .map(({ Name, Description, Logo }) => (
+            .map(({ Name, Description, Logo }, index) => (
               <div
                 className="flex items-center p-4 hover:bg-gray-300"
-                key={name}
+                key={index}
                 onClick={HandleSelectTemplate(Name)}
               >
                 <img className="w-12 h-12 mr-4" src={Logo} />
