@@ -1,7 +1,7 @@
 {
   "name": "routine",
   "version": "1.0.0",
-  "description": "Create and manage projects using a graphical interface",
+  "description": "Routine for Easy Project Management",
   "main": "index.js",
   "scripts": {
     "client:start": "webpack-dev-server --open",
