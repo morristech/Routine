@@ -14,6 +14,7 @@ import { withNamespaces } from 'react-i18next';
 import PropTypes from 'prop-types';
 import SweetAlert from 'sweetalert2';
 import WrapperHocComponent from './Wrapper.container';
+import binding from '../binding.json';
 import '../styles/animate.css';
 
 function ImportTemplateContainer(props) {
@@ -33,7 +34,7 @@ function ImportTemplateContainer(props) {
    */
   function HandleFileChange(event) {
     event.preventDefault();
-    setTemplateFile(e.target.files[0]);
+    setTemplateFile(event.target.files[0]);
   }
 
   /**
@@ -56,7 +57,7 @@ function ImportTemplateContainer(props) {
       // display sweet alert message.
       SweetAlert.fire(
         lang('Import.container.sweetalert.success'),
-        value.concat(lang('Import.container.sweetalert.create.template')),
+        lang('Import.container.sweetalert.create.template'),
         'success',
       );
     });
@@ -76,7 +77,12 @@ function ImportTemplateContainer(props) {
             className="fa fa-cloud-upload pulse text-gray-400 rounded-full"
             style={{ fontSize: '9.52rem' }}
           />
-          <input type="file" name="template_file" className="mb-1 mt-4" />
+          <input
+            type="file"
+            name="template_file"
+            className="mb-1 mt-4"
+            onChange={HandleFileChange}
+          />
           <p className="w-full text-center px-4 text-gray-600 text-xs">
             {lang('Import.container.create.template.alert')}
             <br />
@@ -88,7 +94,10 @@ function ImportTemplateContainer(props) {
       </div>
       <div className="max-w-sm mx-auto mt-10">
         <div className="flex flex-wrap -mx-3 mb-6">
-          <button className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 border border-blue-700">
+          <button
+            className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 border border-blue-700"
+            onClick={HandleCreateTemplate}
+          >
             {lang('Import.component.submit')}
           </button>
         </div>
