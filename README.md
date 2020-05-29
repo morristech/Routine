@@ -1,10 +1,10 @@
-<p style="text-align=center;">
 <img src="public/logo256.png">
-</p
 
-<div align="center">
-  <sub>Created by <a href="https://github.com/getspooky">getspooky</a> and maintained with ❤️ by an amazing <a href="https://github.com/routine/routine/graphs/contributors">team of developers</a>.</sub>
-</div>
+<sub>Created by <a href="https://github.com/getspooky">getspooky</a> and maintained with ❤️ by an amazing <a href="https://github.com/routine/routine/graphs/contributors">team of developers</a>.</sub>
+
+![GitHub](https://img.shields.io/github/license/Routine-App/Routine?style=for-the-badge)
+![GitHub repo size](https://img.shields.io/github/repo-size/Routine-App/Routine?style=for-the-badge)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/Routine-App/Routine?style=for-the-badge)
 
 # About Routine
 
@@ -30,10 +30,6 @@ Move to the appropriate directory: cd `<YOUR_PROJECT_NAME>`.
 Run `npm run routine` in order to start Routine project.
 
 > Now you can go to `localhost:8080` and see your app!
-
-### How do I start the application ?
-
-Inside your project directory, it will generate the initial project structure and install the transitive dependencies:
 
 ## Supported Templates
 
