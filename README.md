@@ -25,6 +25,10 @@ You can install it using the installers below :
 
 > Distributions available for Linux, macOS, Windows.
 
+```sh
+git clone https://github.com/Routine-App/Routine.git
+```
+
 Move to the appropriate directory: cd `<YOUR_PROJECT_NAME>`.
 
 Run `npm run routine` in order to start Routine project.
