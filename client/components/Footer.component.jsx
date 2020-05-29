@@ -30,9 +30,14 @@ function FooterComponent(props) {
           <div className="md:flex md:flex-row-reverse items-center py-4">
             <div className="text-center mb-4 md:mb-0 md:flex">
               <div className="text-xl">
-                <i className="fa fa-github  text-gray-900 mr-2" />
-                <i className="fa fa-twitter text-blue-500 mr-2" />
-                <i className="fa fa-medium  text-gray-700 mr-2" />
+                <i
+                  className="fa fa-github  text-gray-900 mr-2"
+                  onClick={open('https://github.com/Routine-App/Routine')}
+                />
+                <i
+                  className="fa fa-twitter text-blue-500 mr-2"
+                  onClick={open('https://twitter.com/AmeurIdrissi')}
+                />
               </div>
             </div>
             <div className="text-gray-600 text-center md:mr-4">
