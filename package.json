@@ -5,10 +5,9 @@
   "main": "index.js",
   "scripts": {
     "client:start": "webpack-dev-server --open",
-    "gui": "concurrently \"npm run client:start\" \"npm run daemon:serve\"",
     "test": "jest --watchAll",
     "client:build": "webpack",
-    "hello-routine": "npm run client:start && go run daemon/main.go",
+    "hello-routine": "concurrently \"npm run client:start\" \"go run daemon/main.go\"",
     "build:css": "postcss client/styles/tailwind.css -o client/index.css",
     "watch:css": "postcss client/styles/tailwind.css -o client/index.css -w",
     "prettier": "prettier --write \"**/*.+(js|jsx|json|css|md)\""
