@@ -1,12 +1,10 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-
-<p style="text-align=center;">
 <img src="public/logo256.png">
-</p
 
-<div align="center">
-  <sub>Created by <a href="https://github.com/getspooky">getspooky</a> and maintained with ❤️ by an amazing <a href="https://github.com/routine/routine/graphs/contributors">team of developers</a>.</sub>
-</div>
+<sub>Created by <a href="https://github.com/getspooky">getspooky</a> and maintained with ❤️ by an amazing <a href="https://github.com/Routine-App/Routine/graphs/contributors">team of developers</a>.</sub>
+
+![GitHub](https://img.shields.io/github/license/Routine-App/Routine?style=for-the-badge)
+![GitHub repo size](https://img.shields.io/github/repo-size/Routine-App/Routine?style=for-the-badge)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/Routine-App/Routine?style=for-the-badge)
 
 # About Routine
 
@@ -25,29 +23,11 @@ This awesome tool allows developers to graphically create a new project, live mo
 
 You can install it using the installers below :
 
-<button style="
-  margin:10px auto;
-  background-color: #f77840;
-  border-radius: 0.3125rem;
-  color: #202224;
-  font-size: 1.8rem;
-  height: 4rem;
-  font-weight: 600;
-  padding: 0 2.325rem;
-  justify-content: center;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  box-sizing: border-box;
-  color: #fff;
-  cursor: pointer;
-  border-bottom-width: 5px!important;
-  --border-opacity: 1!important;
-  border-color: #ff8b56!important;
-">
-<i class="fa fa-cloud-download"></i>
-Download Routine
-</button>
-
 > Distributions available for Linux, macOS, Windows.
+
+```sh
+git clone https://github.com/Routine-App/Routine.git
+```
 
 Move to the appropriate directory: cd `<YOUR_PROJECT_NAME>`.
 
@@ -55,9 +35,13 @@ Run `npm run routine` in order to start Routine project.
 
 > Now you can go to `localhost:8080` and see your app!
 
-### How do I start the application ?
+## Starting the Routine Project
 
-Inside your project directory, it will generate the initial project structure and install the transitive dependencies:
+To start the Routine CLI 1.0 GUI, run one of the following commands depending on your previously used installation path:
+
+```sh
+npm run hello-routine
+```
 
 ## Supported Templates
 
