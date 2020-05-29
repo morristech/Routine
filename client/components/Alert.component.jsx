@@ -26,7 +26,10 @@ function AlertComponent(props) {
         className="p-3 items-center leading-none lg:rounded-full flex lg:inline-flex"
         role="alert"
       >
-        <span className="font-semibold pb-1 cursor-pointer text-gray-100 mr-2 underline text-2xl text-center flex-auto">
+        <span
+          className="font-semibold pb-1 cursor-pointer text-gray-100 mr-2 underline text-2xl text-center flex-auto"
+          onClick={() => open('https://github.com/Routine-App/Routine')}
+        >
           {lang('Alert.component.content')}
           <strong className="text-white">
             {' ' + lang('Alert.component.github')}
