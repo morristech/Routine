@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-
 <p style="text-align=center;">
 <img src="public/logo256.png">
 </p
@@ -24,28 +22,6 @@ This awesome tool allows developers to graphically create a new project, live mo
 # Installation
 
 You can install it using the installers below :
-
-<button style="
-  margin:10px auto;
-  background-color: #f77840;
-  border-radius: 0.3125rem;
-  color: #202224;
-  font-size: 1.8rem;
-  height: 4rem;
-  font-weight: 600;
-  padding: 0 2.325rem;
-  justify-content: center;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  box-sizing: border-box;
-  color: #fff;
-  cursor: pointer;
-  border-bottom-width: 5px!important;
-  --border-opacity: 1!important;
-  border-color: #ff8b56!important;
-">
-<i class="fa fa-cloud-download"></i>
-Download Routine
-</button>
 
 > Distributions available for Linux, macOS, Windows.
 
